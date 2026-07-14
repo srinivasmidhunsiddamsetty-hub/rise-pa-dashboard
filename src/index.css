@@ -81,13 +81,14 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Iteration 2 (refined) theme: Geist + a faint blue page tint. Applied to the
-   dashboard subtree so surfaces read as one cohesive blue system while cards
-   stay white and text stays high-contrast. */
+/* Iteration 2 (refined) theme: Geist + a soft near-white page gradient. Applied
+   to the dashboard subtree; cards stay white and text stays high-contrast. The
+   --color-canvas token is kept in sync with the gradient so canvas-referencing
+   chrome (sticky-header blur, scrollbars) blends seamlessly. */
 .theme-refined {
-  --color-canvas: #e8eefb;
+  --color-canvas: #f4f6fa;
   font-family: var(--font-refined);
-  background: var(--color-canvas);
+  background: linear-gradient(180deg, #f5f7fb 0%, #f3f6fa 45%, #f4f6fa 100%);
 }
 
 /* Numbers should always align in columns */

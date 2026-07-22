@@ -40,28 +40,17 @@ export function Header({ iteration }: { iteration: 1 | 2 }) {
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-canvas)_84%,transparent)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-6">
-        {/* Brand — left */}
+        {/* Brand — left (wordmark only in both iterations) */}
         <div className="flex items-center gap-2.5">
           <BrandMark />
-          {refined ? (
-            <span className="text-[16px] font-semibold tracking-tight text-[var(--color-ink)]">
-              RISE PA
-            </span>
-          ) : (
-            <div className="leading-none">
-              <div className="flex items-center gap-2">
-                <span className="text-[15px] font-semibold tracking-tight text-[var(--color-ink)]">
-                  RISE PA
-                </span>
-                <span className="rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] px-1.5 py-0.5 text-[10px] font-medium text-[var(--color-ink-3)]">
-                  Iteration 1
-                </span>
-              </div>
-              <span className="mt-1 block text-[11px] text-[var(--color-ink-3)]">
-                Executive dashboard · PennTAP
-              </span>
-            </div>
-          )}
+          <span
+            className={cn(
+              'font-semibold tracking-tight text-[var(--color-ink)]',
+              refined ? 'text-[16px]' : 'text-[15px]',
+            )}
+          >
+            RISE PA
+          </span>
         </div>
 
         {/* Tabs + iteration switch — right */}

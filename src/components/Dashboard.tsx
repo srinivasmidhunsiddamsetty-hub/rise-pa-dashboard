@@ -94,15 +94,6 @@ export function Dashboard({ iteration }: { iteration: 1 | 2 }) {
         </Tabs.Content>
       </main>
 
-      {/* Iteration 1 keeps the program footer; the refined build drops it. */}
-      {iteration === 1 && (
-        <footer className="mx-auto max-w-[1320px] px-6 pb-8 pt-2">
-          <p className="text-[11px] text-[var(--color-ink-3)]">
-            RISE PA · ~$40M EPA Climate Pollution Reduction Grant administered by PennTAP ·
-            Executive monitoring prototype · Sample data
-          </p>
-        </footer>
-      )}
     </Tabs.Root>
   )
 }

@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { CalendarRange } from 'lucide-react'
 import { GRANT_YEARS, WINDOWS } from '../data/program'
 import type { FilterScope } from '../lib/selectors'
-import { scopeLabel } from '../lib/selectors'
 import { cn } from '../lib/cn'
 
 // Global filter (PRD §5.1 / §7.1). Three modes that re-compute EVERYTHING.
@@ -159,14 +157,6 @@ export function FilterBar({
           </AnimatePresence>
         </div>
 
-        {/* Iteration 1: active-scope breadcrumb (removed in the refined build) */}
-        {!refined && (
-          <div className="inline-flex shrink-0 items-center gap-2 rounded-[8px] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-[12px] text-[var(--color-ink-2)]">
-            <CalendarRange size={14} className="text-[var(--color-ink-3)]" />
-            <span className="font-medium text-[var(--color-ink)]">Scope</span>
-            <span aria-live="polite">{scopeLabel(scope)}</span>
-          </div>
-        )}
       </div>
     </div>
   )

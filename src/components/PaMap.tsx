@@ -287,12 +287,7 @@ export function PaMap({
         </div>
       ) : (
         <>
-          <SectionHeading
-            eyebrow="Statewide reach"
-            title="Funding by area"
-            subtitle="Hover to peek · click to lock an area"
-            right={LevelToggle}
-          />
+          <SectionHeading eyebrow="Statewide reach" title="Funding by area" right={LevelToggle} />
           {/* Metric selector + clear (Iteration 1) */}
           <div className="mt-3 flex items-center justify-between">
             <div

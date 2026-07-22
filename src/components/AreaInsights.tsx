@@ -111,11 +111,6 @@ function BasicPanel({ insight, onClear }: { insight: AreaInsight; onClear: () =>
             max={Math.max(...insight.topRegions.map((r) => r.funding))}
             fmt={fmtMoneyShort}
           />
-          {insight.lidacShare != null && (
-            <p className="mt-4 text-[12px] text-[var(--color-ink-3)]">
-              Disadvantaged-community coverage — {fmtPct(insight.lidacShare)} of funding (Justice40).
-            </p>
-          )}
         </div>
       ) : (
         <p className="text-[12px] leading-relaxed text-[var(--color-ink-3)]">

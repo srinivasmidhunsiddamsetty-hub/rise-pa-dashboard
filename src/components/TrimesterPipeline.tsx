@@ -245,7 +245,14 @@ function FunnelView({ scope }: { scope: FilterScope }) {
                   animate={{ width: `${Math.max(pct, 3)}%` }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
                 />
-                <span className="absolute inset-y-0 left-3 flex items-center text-[13px] font-semibold text-[var(--color-ink)]">
+                {/* The Funded bar is solid accent; its value needs white for contrast.
+                    The lighter (committed) bars keep dark ink. */}
+                <span
+                  className={cn(
+                    'absolute inset-y-0 left-3 flex items-center text-[13px] font-semibold',
+                    s.key === 'awarded' ? 'text-white' : 'text-[var(--color-ink)]',
+                  )}
+                >
                   {fmtInt(s.value)}
                 </span>
               </div>

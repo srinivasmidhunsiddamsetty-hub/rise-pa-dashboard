@@ -101,22 +101,20 @@ function BasicPanel({ insight, onClear }: { insight: AreaInsight; onClear: () =>
         <Stat label="Jobs" value={fmtInt(insight.jobsCommitted)} sub="committed" />
       </div>
 
-      <div className="my-5 h-px bg-[var(--color-border)]" />
-
-      {isStatewide && insight.topRegions ? (
-        <div>
-          <p className="mb-3 text-[13px] font-semibold text-[var(--color-ink)]">Top regions by funding</p>
-          <RankedBars
-            items={insight.topRegions.map((r) => ({ label: r.region, value: r.funding }))}
-            max={Math.max(...insight.topRegions.map((r) => r.funding))}
-            fmt={fmtMoneyShort}
-          />
-        </div>
-      ) : (
-        <p className="text-[12px] leading-relaxed text-[var(--color-ink-3)]">
-          Industry composition and committed-vs-realized detail for this area arrive in the
-          decision-support layer.
-        </p>
+      {/* Statewide gets the ranked-region breakdown; a selected area ends after
+          its stats (divider included, so nothing dangles). */}
+      {isStatewide && insight.topRegions && (
+        <>
+          <div className="my-5 h-px bg-[var(--color-border)]" />
+          <div>
+            <p className="mb-3 text-[13px] font-semibold text-[var(--color-ink)]">Top regions by funding</p>
+            <RankedBars
+              items={insight.topRegions.map((r) => ({ label: r.region, value: r.funding }))}
+              max={Math.max(...insight.topRegions.map((r) => r.funding))}
+              fmt={fmtMoneyShort}
+            />
+          </div>
+        </>
       )}
     </div>
   )

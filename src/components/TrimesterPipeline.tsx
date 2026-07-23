@@ -6,7 +6,7 @@ import { EmptyState } from './states/EmptyState'
 import { WINDOWS } from '../data/program'
 import type { TrimesterWindow } from '../data/types'
 import type { FilterScope } from '../lib/selectors'
-import { aggregateFunnel, pipelineMode, scopeLabel } from '../lib/selectors'
+import { aggregateFunnel, pipelineMode } from '../lib/selectors'
 import { fmtInt, fmtPct } from '../lib/format'
 import { cn } from '../lib/cn'
 
@@ -207,8 +207,8 @@ function LegendItem({ color, h, label }: { color: string; h: number; label: stri
 }
 
 /* ══ Funnel (single window / grant year) — shared ═════════════════════════ */
-function FunnelView({ scope, iteration }: { scope: FilterScope; iteration: 1 | 2 }) {
-  const { stages, windowIds } = aggregateFunnel(scope)
+function FunnelView({ scope }: { scope: FilterScope }) {
+  const { stages } = aggregateFunnel(scope)
   const received = stages.find((s) => s.key === 'received')?.value ?? 0
   if (received === 0) {
     return (
@@ -219,7 +219,6 @@ function FunnelView({ scope, iteration }: { scope: FilterScope; iteration: 1 | 2
     )
   }
   const flow = stages.filter((s) => s.kind === 'flow')
-  const dropoff = stages.find((s) => s.kind === 'dropoff')
 
   return (
     <div>
@@ -258,23 +257,6 @@ function FunnelView({ scope, iteration }: { scope: FilterScope; iteration: 1 | 2
         })}
       </div>
 
-      {iteration === 1 && dropoff && dropoff.value > 0 && (
-        <div className="mt-3 flex items-center gap-3 border-t border-dashed border-[var(--color-border)] pt-3">
-          <span className="w-36 shrink-0 text-[13px] text-[var(--color-ink-3)]">{dropoff.label}</span>
-          <span className="tnum text-[13px] font-medium text-[var(--color-ink-2)]">
-            {fmtInt(dropoff.value)} dropped off
-          </span>
-          <span className="text-[12px] text-[var(--color-ink-3)]">
-            · {fmtPct(dropoff.value / received)} of received
-          </span>
-        </div>
-      )}
-
-      {iteration === 1 && (
-        <p className="mt-4 text-[12px] text-[var(--color-ink-3)]">
-          Funnel for {windowIds.join(' + ')} · {scopeLabel(scope)}
-        </p>
-      )}
     </div>
   )
 }
@@ -330,7 +312,7 @@ export function TrimesterPipeline({
               ))}
             </div>
           ) : mode === 'funnel' ? (
-            <FunnelView scope={scope} iteration={iteration} />
+            <FunnelView scope={scope} />
           ) : refined ? (
             <div>
               <div className={cn(COLS, 'border-b border-[var(--color-border)] pb-2')}>
